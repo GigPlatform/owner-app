@@ -68,17 +68,18 @@
         "commision": "4%"
         }],
 
-      "workerJSON": [{
-      		"first_name": "Ryan",
-          "last_name": "James",
+      "ownerData": [{
+      		"first_name": "Will",
+          "last_name": "Smith",
       		"profilePic": "assets/img/user.png",
       		"about": "Rating",
           "info": "jhklgndjkagilajnvjwldkgnrjkwlgnjkwllbnbvjkr",
-          "city": "Denver",
-          "state": "Colorado",
-          "postcode": "01119",
+          "city": "Houston",
+          "state": "Texas",
+          "postcode": "01876",
           "country": "USA",
-          "phone": "5555 5555"
+          "phone": "5555 5555",
+          "twitter": "@example"
       	}],
 
       "employeeJSON": [{
@@ -86,6 +87,11 @@
           "profilePic": "assets/img/user.png",
           "about": "Rating",
           "description": "Description"
+        }],
+
+      "policies": [{
+          "registration": "Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [privacy_policy]",
+          "checkout": "Your personal data will be used to support your experience throughout this website, and for other purposes described in our [privacy_policy]"
         }],
 
       "activeJSON": [{
@@ -226,5 +232,32 @@
         "description": "Description",
         "skills": "Skills required",
         "Money": "Money earned"
+      }],
+
+    "privacyPolicy": [{
+        "valor1": "Privacy Policy",
+        "valor2": "Shop",
+        "valor3": "Vendor registration",
+        "valor4": "Vendor Dashboard"
+      }],
+
+    "relatedProd": [{
+        "name1": "Product 1",
+        "name2": "Product 2",
+        "name3": "Product 3",
+        "name4": "Product 4"
+      }],
+
+    "paymeth": [{
+        "val1": "Paypal Masspay",
+        "val2": "Paypal Payout",
+        "val3": "Direct Bank Transfer"
+      }],
+
+    "commisionType": [{
+        "var1": "Fixed amount",
+        "var2": "Percentage",
+        "var3": "Percentage + Fixed (per transaction)",
+        "var4": "Percentage + Fixed (per unit)"
       }]
 }

@@ -10,12 +10,15 @@ import { DataFinder } from '../../providers/datafinder';
 })
 export class SettingsPage {
 	stores: any[];
-	workerJSON: any[];
+	ownerData: any[];
 	products: any[];
 	dashboard: any[];
+  policies: any[];
+  privacyPolicy: any[];
+  relatedProd: any[];
+  paymeth: any[];
 
   constructor(public navCtrl: NavController, private dataFinder : DataFinder, public modalCtrl: ModalController) {
-  	this.config = "Store";
   }
 
   ionViewDidLoad() {
@@ -25,9 +28,25 @@ export class SettingsPage {
 
   SetQueryOptionsData(data : any){
     this.stores = data.stores;
-    this.workerJSON = data.workerJSON;
+    this.ownerData = data.ownerData;
     this.products = data.products;
     this.dashboard = data.dashboard;
+    this.policies = data.policies;
+    this.privacyPolicy = data.privacyPolicy;
+    this.relatedProd = data.relatedProd;
+    this.paymeth = data.paymeth;
     }
+
+  OpenAnnouncements(){
+    this.navCtrl.push('AnnouncementsPage');
+  }
+
+  OpenHistory(){
+    this.navCtrl.push('HomePage');
+  }
+
+  OpenCancel(){
+    this.navCtrl.push('HomePage');
+  }
 
 }

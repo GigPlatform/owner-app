@@ -1,7 +1,6 @@
 <ion-header> 
 
-<ion-navbar text-center color="dark">
-<ion-navbar hideBackButton *navbar></ion-navbar>
+<ion-toolbar text-center color="dark">
   <ion-buttons start>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -9,18 +8,18 @@
   </ion-buttons>
 
   <ion-title center>Settings</ion-title>
-</ion-navbar>
+</ion-toolbar>
 
 </ion-header>
 
 <ion-content padding>
 	<div padding>
 	    <ion-segment [(ngModel)]="config">
-	      <ion-segment-button value="Store">
-	        Store
+	      <ion-segment-button value="General">
+	        General
 	      </ion-segment-button>
-	      <ion-segment-button value="Inventory">
-	        Inventory
+	      <ion-segment-button value="Stores">
+	        Stores
 	      </ion-segment-button>
 	      <ion-segment-button value="Profile">
 	        Profile
@@ -28,127 +27,177 @@
 	      <ion-segment-button value="Reports">
 	        Reports
 	      </ion-segment-button>
+	      <ion-segment-button value="Privacy">
+	        Privacy policies
+	      </ion-segment-button>
 	    </ion-segment>
 	</div>
 
 	<div [ngSwitch]="config">
-	    <ion-list *ngSwitchCase="'Store'">
-	    	<ion-grid>
+	    <ion-list *ngSwitchCase="'General'">
+			<ion-list>
+	    		<ion-item>
+					<ion-label>Approve vendors manually</ion-label>
+ 					<ion-checkbox color="primary" checked="false"></ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-label>Enable customer support</ion-label>  		
+					<ion-checkbox color="primary" checked="false"></ion-checkbox>
+				</ion-item>
+			</ion-list>
+			<ion-list>
+				<ion-list-header>Products Capability</ion-list-header>
+				<ion-list>
+					<div *ngFor ="let prod of relatedProd">
+						<ion-item>
+							<ion-label>Products to show on the single products page</ion-label>
+							<ion-select [(ngModel)]="relProd" multiple="true">
+						    	<ion-option value="p">{{prod.name1}}</ion-option>
+						    	<ion-option value="s">{{prod.name2}}</ion-option>
+						    	<ion-option value="r">{{prod.name3}}</ion-option>
+						    	<ion-option value="d">{{prod.name4}}</ion-option>
+							</ion-select>
+						</ion-item>
+					</div>
+				</ion-list>
+				<ion-item>
+					<ion-label>Vendors can submit products for approval/publishing</ion-label>
+ 					<ion-checkbox color="primary" checked="false"></ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-label>Products uploaded by vendors will be directly published without admin approval</ion-label>
+ 					<ion-checkbox color="primary" checked="false"></ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-label>Enable Products Reviews</ion-label>
+ 					<ion-checkbox color="primary" checked="false"></ion-checkbox>
+				</ion-item>
+			</ion-list>
+			<button ion-button block (click)="OpenHistory()">Save changes</button>
+			<button ion-button block (click)="OpenCancel()" color="light">Cancel</button>
+		</ion-list>
+
+		<ion-list *ngSwitchCase="'Stores'">
+			<ion-grid>
 	    		<ion-row>
 			  		<ion-col>
 			  			<ion-list>
-				    		<div *ngFor ="let store of stores">
 				    			<ion-list-header>Store details:</ion-list-header>
-    							<ion-item>
-						    		<ion-label color="primary">Store name</ion-label>
-						    		<ion-input placeholder type="text" [(ngModel)]="store.name"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">City</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="store.city"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">Country</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="store.country"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">Postcode</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="store.postcode"></ion-input>
-								</ion-item>
-							</div>
-							<div class="paypalbutton" padding-vertical>
-								<button ion-button round (click)="OpenHistory()" color="secondary">Paypal Configuration</button>
-							</div>
+				    			<ion-grid class="tabla">
+									<div *ngFor ="let store of stores">
+							    		<ion-row>
+									  		<ion-col>
+									  			Store name:
+									  		</ion-col>
+									  		<ion-col>
+									  			City:
+									  		</ion-col>
+									  		<ion-col>
+									  			Country:
+									  		</ion-col>
+									  		<ion-col>
+									  			Postcode:
+									  		</ion-col>
+									  		<ion-col>
+									  			Payment method:
+									  		</ion-col>
+									  	</ion-row>
+									  	<ion-row>
+									  		<ion-col>
+									  			<h2>{{store.name}}</h2>
+									  		</ion-col>
+									  		<ion-col>
+									  			<h2>{{store.city}}</h2>
+									  		</ion-col>
+									  		<ion-col>
+									  			<h2>{{store.country}}</h2>
+									  		</ion-col>
+									  		<ion-col>
+									  			<h2>{{store.postcode}}</h2>
+									  		</ion-col>
+									  		<ion-col>
+									  			<h2>{{store.payment}}</h2>
+									  		</ion-col>
+									  	</ion-row>
+									</div>
+								</ion-grid>
+								<ion-grid>
+									<ion-row>
+										<ion-col>
+											<button ion-button round color="secondary" (click)="OpenStore()">Add new store</button>
+										</ion-col>
+										<ion-col>
+										</ion-col>
+										<ion-col>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
 						</ion-list>
 			  		</ion-col>
 			  		<ion-col>
 	    			</ion-col>
 			  	</ion-row>
 			</ion-grid>
-			<button ion-button block (click)="OpenHistory()">Save changes</button>
-			<button ion-button block (click)="OpenHistory()" color="light">Cancel</button>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'Inventory'">
-			<ion-grid class="tabla">
-				<div *ngFor ="let product of products">
-		    		<ion-row>
-				  		<ion-col>
-				  			Product:
-				  		</ion-col>
-				  		<ion-col>
-				  			Price:
-				  		</ion-col>
-				  		<ion-col>
-				  			Stock:
-				  		</ion-col>
-				  		<ion-col>
-				  			Categories:
-				  		</ion-col>
-				  		<ion-col>
-				  			Date:
-				  		</ion-col>
-				  		<ion-col>
-				  			Status:
-				  		</ion-col>
-				  	</ion-row>
-				  	<ion-row>
-				  		<ion-col>
-				  			<h2>{{product.name}}</h2>
-				  		</ion-col>
-				  		<ion-col>
-				  			<h2>{{product.price}}</h2>
-				  		</ion-col>
-				  		<ion-col>
-				  			<h2>{{product.stock}}</h2>
-				  		</ion-col>
-				  	</ion-row>
+			<!-- <ion-list>
+				<div *ngFor ="let pay of paymeth">
+					<ion-item>
+						<ion-label>Allowed Payment Methods</ion-label>
+						<ion-select [(ngModel)]="relProd" multiple="true">
+					    	<ion-option value="p">{{pay.val1}}</ion-option>
+					    	<ion-option value="s">{{pay.val2}}</ion-option>
+					    	<ion-option value="r">{{pay.val3}}</ion-option>
+						</ion-select>
+					</ion-item>
 				</div>
-			</ion-grid>
+			</ion-list> -->
 			<button ion-button block (click)="OpenHistory()">Save changes</button>
-			<button ion-button block (click)="OpenHistory()" color="light">Cancel</button>
+			<button ion-button block (click)="OpenCancel()" color="light">Cancel</button>
 		</ion-list>
 
 		<ion-list *ngSwitchCase="'Profile'">
 			<ion-grid>
 	    		<ion-row>
 			  		<ion-col>
-			      		<ion-item *ngFor="let worker of workerJSON">
-			        		<div class="worker_image" padding-vertical>
-			        			<img [src]="worker.profilePic" />
+			      		<ion-item *ngFor="let own of ownerData">
+			        		<div class="owner_image" padding-vertical>
+			        			<img [src]="own.profilePic" />
 			        		</div>
 			       		</ion-item>
 			     	</ion-col>
 			     	<ion-col>
 				    	<ion-list>
-				    		<div *ngFor ="let worker of workerJSON">
+				    		<div *ngFor ="let own of ownerData">
     							<ion-item>
 						    		<ion-label color="primary">First Name</ion-label>
-						    		<ion-input placeholder type="text" [(ngModel)]="worker.first_name"></ion-input>
+						    		<ion-input placeholder type="text" [(ngModel)]="own.first_name"></ion-input>
 								</ion-item>
 								<ion-item>
 							    	<ion-label color="primary">Last Name</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="worker.last_name"></ion-input>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.last_name"></ion-input>
 								</ion-item>
 								<ion-item>
 							    	<ion-label color="primary">Phone</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="worker.phone"></ion-input>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.phone"></ion-input>
 								</ion-item>
 								<ion-item>
 							    	<ion-label color="primary">Country</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="worker.country"></ion-input>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.country"></ion-input>
 								</ion-item>
 								<ion-item>
 							    	<ion-label color="primary">City</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="worker.city"></ion-input>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.city"></ion-input>
 								</ion-item>
 								<ion-item>
 							    	<ion-label color="primary">State</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="worker.state"></ion-input>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.state"></ion-input>
 								</ion-item>
 								<ion-item>
 							    	<ion-label color="primary">Postcode</ion-label>
-							    	<ion-input placeholder type="text" [(ngModel)]="worker.postcode"></ion-input>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.postcode"></ion-input>
+								</ion-item>
+								<ion-item>
+							    	<ion-label color="primary">Twitter</ion-label>
+							    	<ion-input placeholder type="text" [(ngModel)]="own.twitter"></ion-input>
 								</ion-item>
 							</div>
 						</ion-list>
@@ -162,44 +211,73 @@
 				</ion-item>
 			</ion-list>
 			<button ion-button block (click)="OpenHistory()">Save changes</button>
-			<button ion-button block (click)="OpenHistory()" color="light">Cancel</button>
+			<button ion-button block (click)="OpenCancel()" color="light">Cancel</button>
 		</ion-list>
 		<ion-list *ngSwitchCase="'Reports'">
+			<ion-list-header>Dashboard:</ion-list-header>
+			<ion-list>
+	    		<div *ngFor ="let dash of dashboard">
+    				<ion-item>
+				   		<ion-label color="primary">Total Sales:</ion-label>
+						<ion-input disabled="true" [(ngModel)]="dash.sales"></ion-input>
+					</ion-item>
+					<ion-item>
+				    	<ion-label color="primary">Total Earnings:</ion-label>
+				    	<ion-input disabled="true" [(ngModel)]="dash.earnings"></ion-input>
+					</ion-item>
+					<ion-item>
+				    	<ion-label color="primary">Total Orders:</ion-label>
+				    	<ion-input disabled="true" [(ngModel)]="dash.recOrd"></ion-input>
+					</ion-item>
+					<ion-item>
+				    	<ion-label color="primary">Average Order Value:</ion-label>
+				    	<ion-input disabled="true" [(ngModel)]="dash.avOrdVal"></ion-input>
+					</ion-item>
+				</div>
+			</ion-list>
 			<ion-grid>
-	    		<ion-row>
-			  		<ion-col>
-			  		</ion-col>
-			  		<ion-col>
-			  			<ion-list-header>Dashboard:</ion-list-header>
-			  			<ion-list>
-				    		<div *ngFor ="let dash of dashboard">
-    							<ion-item>
-						    		<ion-label color="primary">Total Sales:</ion-label>
-						    		<ion-input disabled="true" [(ngModel)]="dash.sales"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">Total Earnings:</ion-label>
-							    	<ion-input disabled="true" [(ngModel)]="dash.earnings"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">Total Orders:</ion-label>
-							    	<ion-input disabled="true" [(ngModel)]="dash.recOrd"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">Average Order Value:</ion-label>
-							    	<ion-input disabled="true" [(ngModel)]="dash.avOrdVal"></ion-input>
-								</ion-item>
-								<ion-item>
-							    	<ion-label color="primary">Commision</ion-label>
-							    	<ion-input disabled="true" [(ngModel)]="dash.commision"></ion-input>
-								</ion-item>
-							</div>
-						</ion-list>
-			  		</ion-col>
-			  	</ion-row>
+				<ion-row>
+					<ion-col>
+						<button ion-button block (click)="OpenAnnouncements()">Announcements</button>
+					</ion-col>
+					<ion-col>
+					</ion-col>
+					<ion-col>
+					</ion-col>
+				</ion-row>
 			</ion-grid>
 			<button ion-button block (click)="OpenHistory()">Save changes</button>
-			<button ion-button block (click)="OpenHistory()" color="light">Cancel</button>
+			<button ion-button block (click)="OpenCancel()" color="light">Cancel</button>
+		</ion-list>
+		<ion-list *ngSwitchCase="'Privacy'">
+			<ion-list-header>This section controls the display of your website privacy policy. The privacy notices below will not show up unless a privacy page is first set</ion-list-header>
+			<ion-list>
+				<div *ngFor ="let pol of privacyPolicy">
+					<ion-item>
+						<ion-label>Privacy page</ion-label>
+						<ion-select [(ngModel)]="policies" multiple="true">
+					    	<ion-option value="p">{{pol.valor1}}</ion-option>
+					    	<ion-option value="s">{{pol.valor2}}</ion-option>
+					    	<ion-option value="r">{{pol.valor3}}</ion-option>
+					    	<ion-option value="d">{{pol.valor4}}</ion-option>
+						</ion-select>
+					</ion-item>
+				</div>
+			</ion-list>
+			<ion-list>
+  				<ion-item *ngFor ="let poli of policies">
+				    <ion-label floating>Registration privacy policy</ion-label>
+				    <ion-input placeholder type="text" [(ngModel)]="poli.registration"></ion-input>
+				</ion-item>
+			</ion-list>
+			<ion-list>
+				<ion-item *ngFor ="let poli of policies">
+				    <ion-label floating>Registration privacy policy</ion-label>
+				    <ion-input placeholder type="text" [(ngModel)]="poli.registration"></ion-input>
+				</ion-item>
+			</ion-list>
+			<button ion-button block (click)="OpenHistory()">Save changes</button>
+			<button ion-button block (click)="OpenCancel()" color="light">Cancel</button>
 		</ion-list>
 	</div>
 </ion-content>
