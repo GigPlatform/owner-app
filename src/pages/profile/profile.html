@@ -1,16 +1,14 @@
 <ion-header> 
 
-<ion-navbar text-center color="dark">
-<ion-navbar hideBackButton *navbar></ion-navbar>
-
+<ion-toolbar text-center color="dark">
   <ion-buttons start>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
   </ion-buttons>
 
-  <ion-title center> "Worker name" </ion-title>
-</ion-navbar>
+  <ion-title center>Profile Page</ion-title>
+</ion-toolbar>
 
 </ion-header>
 
@@ -19,18 +17,18 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <ion-item *ngFor="let worker of workerJSON">
+      <ion-item *ngFor="let owner of ownerData">
         <div class="worker.image" padding-vertical>
-          <img [src]="worker.profilePic" />
+          <img [src]="owner.profilePic" />
         </div>
        </ion-item>
      </ion-col>
 
     <ion-col>
-      <ion-item *ngFor="let worker of workerJSON">
-       <h2>{{worker.first_name}}</h2>
-       <h3>{{worker.about}}</h3>
-       <p>{{worker.info}}</p>
+      <ion-item *ngFor="let owner of ownerData">
+       <h2>{{owner.first_name}}</h2>
+       <h3>{{owner.about}}</h3>
+       <p>{{owner.info}}</p>
       </ion-item>
        <ion-item>
         <ion-label>Active</ion-label>

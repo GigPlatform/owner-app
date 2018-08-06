@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
-import { Persona } from '../../models/persona';
+
 import { Personas } from '../../providers';
 import { DataFinder } from '../../providers/datafinder';
 
@@ -11,7 +11,8 @@ import { DataFinder } from '../../providers/datafinder';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-	workerJSON: any[];
+	ownerData: any[];
+
 
   constructor(public navCtrl: NavController, public personas: Personas, private dataFinder : DataFinder, public modalCtrl: ModalController) {
   }
@@ -22,6 +23,6 @@ export class ProfilePage {
   }
 
   SetQueryOptionsData(data : any){
-    this.workerJSON = data.workerJSON;
+    this.ownerData = data.ownerData;
     }
 }

@@ -17,6 +17,7 @@ export class SettingsPage {
   privacyPolicy: any[];
   relatedProd: any[];
   paymeth: any[];
+  config: string = "General";
 
   constructor(public navCtrl: NavController, private dataFinder : DataFinder, public modalCtrl: ModalController) {
   }
